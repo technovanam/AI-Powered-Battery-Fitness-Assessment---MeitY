@@ -1,18 +1,54 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import '../i18n';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <>
+      <StatusBar style="light" />
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#0f172a',
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          contentStyle: {
+            backgroundColor: '#090d16',
+          },
+        }}
+      >
+        <Stack.Screen
+          name="index"
+          options={{ title: 'MeitY Battery Fitness AI', headerShown: false }}
+        />
+        <Stack.Screen
+          name="athlete-setup"
+          options={{ title: 'Athlete Registration' }}
+        />
+        <Stack.Screen
+          name="battery-hub"
+          options={{ title: 'Fitness Assessment Hub' }}
+        />
+        <Stack.Screen
+          name="test-ai-camera"
+          options={{ title: 'AI Live Assessment', headerShown: false }}
+        />
+        <Stack.Screen
+          name="test-manual-entry"
+          options={{ title: 'Manual Assessment' }}
+        />
+        <Stack.Screen
+          name="report-card"
+          options={{ title: 'Fitness Report Card' }}
+        />
+        <Stack.Screen
+          name="sync-center"
+          options={{ title: 'Sync & Privacy Center' }}
+        />
+      </Stack>
+    </>
   );
 }
